@@ -1,4 +1,4 @@
-# pLM4Alg Protocol
+# pLM4Alg Protocol: A protein language model based framework for allergen prediction.
 
 A protocol and practical workflow for **pLM4Alg**, a protein language model based framework for allergen prediction.
 
