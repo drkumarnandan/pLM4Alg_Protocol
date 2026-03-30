@@ -85,7 +85,7 @@ Example: `new_dataset.xlsx`
 
 Run the notebook:
 
-pLM4Alg_Protocol_allergen_prediction_ESM2_320.ipynb
+`pLM4Alg_Protocol_allergen_prediction_ESM2_320.ipynb`
 
 This will generate:
 
@@ -97,7 +97,7 @@ new_data_embeddings_320.csv
 
 Prediction on new datasets is fully demonstrated in the notebook:
 
-pLM4Alg_Protocol_allergen_prediction_ESM2_320.ipynb
+`pLM4Alg_Protocol_allergen_prediction_ESM2_320.ipynb`
 
 Users should follow the step-by-step implementation provided in the notebook, which includes embedding generation, preprocessing, and model prediction.
 
@@ -126,7 +126,7 @@ This protocol uses 320-dimensional embeddings generated from the ESM2 model (esm
 
 Alternative ESM2 variants may be used depending on computational resources; however, larger models require higher memory and computation time.
 
-For short peptide sequences (≤ 50 residues), lightweight models such as PepBERT can be used as efficient alternatives:
+For short peptide sequences (≤ 50 residues), our lightweight models such as PepBERT can be used as efficient alternatives:
 https://github.com/dzjxzyd/PepBERT
 
 Other frameworks that can be explored for extended applications include:
