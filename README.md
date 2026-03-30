@@ -39,11 +39,30 @@ The workflow includes:
 
 ## Installation
 
+### Recommended (Google Colab)
+
+The easiest way to use this protocol is through **Google Colab**, which does not require any local installation.
+
+1. Upload the notebook:
+   `pLM4Alg_Protocol_allergen_prediction_ESM2_320.ipynb`
+
+2. Open it in Google Colab
+
+3. Run the initial cells to automatically install all required packages
+
+This approach avoids dependency issues and provides access to GPU acceleration.
+
+---
+
+### Optional (Local Installation)
+
+The workflow can also be executed on a local system with Python installed.
+
 Install required packages:
 
-```
 pip install tensorflow torch fair-esm scikit-learn pandas numpy h5py keras
-```
+
+GPU support is recommended for faster execution.
 
 ---
 
@@ -53,18 +72,12 @@ pip install tensorflow torch fair-esm scikit-learn pandas numpy h5py keras
 
 Create an Excel file with a column:
 
-```
 sequence
-```
 
 * Use uppercase amino acid sequences
 * No missing values or non-standard residues
 
-Example:
-
-```
-new_data.xlsx
-```
+Example: `new_data.xlsx`
 
 ---
 
@@ -72,55 +85,28 @@ new_data.xlsx
 
 Run the notebook:
 
-```
 pLM4Alg_Protocol_allergen_prediction_ESM2_320.ipynb
-```
 
 This will generate:
 
-```
 new_data_embeddings_320.csv
-```
 
 ---
 
 ### Step 3: Run prediction
 
-```python
-from keras.models import load_model
-import numpy as np
-import pandas as pd
+Prediction on new datasets is fully demonstrated in the notebook:
 
-# load model
-model = load_model('best_model_grid_320.keras')
+pLM4Alg_Protocol_allergen_prediction_ESM2_320.ipynb
 
-# load embeddings
-X_new = pd.read_csv('new_data_embeddings_320.csv').to_numpy()
-X_new = X_new.reshape((X_new.shape[0], 320, 1))
-
-# predict
-predicted_probability = model.predict(X_new)
-
-predicted_class = np.argmax(predicted_probability, axis=1)
-confidence_score = np.max(predicted_probability, axis=1)
-
-# load original dataset
-dataset = pd.read_excel('new_data.xlsx')
-
-dataset['predicted_label'] = predicted_class
-dataset['confidence_score'] = confidence_score
-
-dataset.to_excel('new_data_prediction_result.xlsx', index=False)
-
-print(dataset.head())
-```
+Users are encouraged to follow the step-by-step implementation provided in the notebook, which includes embedding generation, preprocessing, and model prediction.
 
 ---
 
 ## Output
 
-* `predicted_label` → 1 = allergen, 0 = non-allergen
-* `confidence_score` → model confidence (0–1)
+* predicted_label → 1 = allergen, 0 = non-allergen
+* confidence_score → model confidence (0–1)
 
 ---
 
@@ -140,7 +126,16 @@ This protocol uses 320-dimensional embeddings generated from the ESM2 model (esm
 
 Alternative ESM2 variants may also be used depending on computational resources; however, larger models require higher memory and computation time.
 
-For short peptide sequences (≤ 50 residues), our lightweight models such as PepBERT can be considered as efficient alternatives (https://github.com/dzjxzyd/PepBERT). Other frameworks such as UniDL4BioPep (https://github.com/drkumarnandan/LLM_book_chapter) and pLM4CPPs (https://github.com/drkumarnandan/pLM4CPPs) can also be explored for extended applications.
+For short peptide sequences (≤ 50 residues), lightweight models such as PepBERT can be considered as efficient alternatives. Other frameworks such as UniDL4BioPep and pLM4CPPs may also be explored for extended applications.
+
+---
+
+## Applications
+
+* Food allergen prediction
+* Peptide screening
+* Immunological studies
+* General protein classification
 
 ---
 
